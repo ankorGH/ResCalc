@@ -1,0 +1,40 @@
+<html>	
+	<head>
+		<script src="./vue.js"></script>	
+		
+	</head>
+	<body>
+		<div id="dev">
+			<h1>{{ calcResistance }}</h1>
+			<button v-if="bandInUse" @click="changeBand">
+				4 Band Resistor
+			</button>
+			<button v-else @click="changeBand">
+				5 Band Resistor
+			</button>
+			<label>1st Band</label>
+			<select name="firstBand" id="" @click="selectColor" v-model="firstBand">
+				<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+			</select>
+			<label>2nd Band</label>
+			<select name="secondBand" id="" @click="selectColor" v-model="secondBand">
+				<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+			</select>
+			<span v-show="offBand3">
+				<label>3rd Band</label>
+			<select name="thirdBand" id="" @click="selectColor" v-model="thirdBand">
+				<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+			</select>
+			</span>
+			<label>Multiplier</label>
+			<select name="multiplier" id="" @click="selectColor" v-model="multiplier">
+				<option :value="color.multiplier" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+			</select>
+			<label>Tolerance</label>
+			<select name="tolerance" id="" @click="selectColor" v-model="tolerance">
+				<option :value="color.tolerance" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+			</select>	
+		</div>
+		<script src="./script.js"></script>
+	</body>
+</html>

@@ -1,12 +1,13 @@
 let app = new Vue({
 	el:"#dev",
 	data:{
-		bandInUse:true,
-		offBand3:false,
-		firstBand:5,
-		secondBand:6,
-		thirdBand:3,
-		multiplier:10000,
+		bandStyleOn:"btn btn-success",
+		bandStyleOff:"btn btn-danger",
+		offBand3:true,
+		firstBand:"5",
+		secondBand:"6",
+		thirdBand:"3",
+		multiplier:"10000",
 		tolerance:"+0.5% (D)",
 		colors:[
 			{col:"Black"  ,styl:"background-color:black;color:white;", value:0, tolerance:"0", multiplier:1},
@@ -37,21 +38,27 @@ let app = new Vue({
 			}else if(e.target.name === "tolerance"){
 				this.tolerance = e.target.value;
 			}
-			// console.log(this.firstBand)
 		},
 		changeBand(){
-			this.bandInUse = !this.bandInUse;
 			this.offBand3 = !this.offBand3;
+			if(this.bandStyleOff !== this.bandStyleOn){
+				let temp = this.bandStyleOff;
+				this.bandStyleOff = this.bandStyleOn;
+				this.bandStyleOn  = temp;
+			}
 		}
 	},
 	computed:{
 		calcResistance(){
 			if(this.offBand3){
-				return +(this.firstBand+this.secondBand+this.thirdBand)*(+this.multiplier) + " Ohms "+" Tolerance: "+this.tolerance;	
+				return +(this.firstBand+this.secondBand+this.thirdBand)*(+this.multiplier) + " Ohms ";	
 			}else{
-				return +(this.firstBand+this.secondBand)*(+this.multiplier) + " Ohms "+" Tolerance: "+this.tolerance;
+				return +(this.firstBand+this.secondBand)*(+this.multiplier) + " Ohms ";
 			}
 			
+		},
+		calcTolerance(){
+			return this.tolerance;
 		}
 	}
 });

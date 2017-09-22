@@ -1,40 +1,89 @@
 <html>	
 	<head>
 		<script src="./vue.js"></script>	
-		
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+		<style>
+			.control-btns{
+				margin:20px 0 !important;
+			}
+			#finalRes{
+				background: #480048;
+				color:#fff;
+				padding: 15px;	
+			}
+		</style>
 	</head>
 	<body>
-		<div id="dev">
-			<h1>{{ calcResistance }}</h1>
-			<button v-if="bandInUse" @click="changeBand">
+		
+		<div class="text-center">
+			<img src="./resistor.jpg" alt="" height="250" class="img-responsive">	
+		</div>
+		
+		<div id="dev" class="container">
+			
+			<div class="container text-center control-btns">
+				<button  @click="changeBand" :class="bandStyleOn">
 				4 Band Resistor
-			</button>
-			<button v-else @click="changeBand">
-				5 Band Resistor
-			</button>
-			<label>1st Band</label>
-			<select name="firstBand" id="" @click="selectColor" v-model="firstBand">
-				<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
-			</select>
-			<label>2nd Band</label>
-			<select name="secondBand" id="" @click="selectColor" v-model="secondBand">
-				<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
-			</select>
-			<span v-show="offBand3">
-				<label>3rd Band</label>
-			<select name="thirdBand" id="" @click="selectColor" v-model="thirdBand">
-				<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
-			</select>
-			</span>
-			<label>Multiplier</label>
-			<select name="multiplier" id="" @click="selectColor" v-model="multiplier">
-				<option :value="color.multiplier" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
-			</select>
-			<label>Tolerance</label>
-			<select name="tolerance" id="" @click="selectColor" v-model="tolerance">
-				<option :value="color.tolerance" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
-			</select>	
+				</button>
+				<button  @click="changeBand" :class="bandStyleOff">
+					5 Band Resistor
+				</button>
+			</div>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 form-group">
+						<label for="firstBand" class="">1st Band</label>
+							<select name="firstBand" id="" @click="selectColor" v-model="firstBand" class="form-control">
+							<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+						</select>
+					</div>
+
+					<div class="col-sm-4 form-group">
+						<label for="secondBand" class="">2nd Band</label>
+						<select name="secondBand" id="" @click="selectColor" v-model="secondBand" class="form-control">
+							<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+						</select>
+					</div>
+
+					<div class="col-sm-4 form-group" >
+						<label for="thirdBand" class="">3rd Band</label>
+						<select name="thirdBand" id="" @click="selectColor" v-model="thirdBand" class="form-control" :disabled="offBand3">
+						<option :value="color.value" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+					</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4 form-group">
+						<label for="multiplier">Multiplier</label>
+						<select name="multiplier" id="" @click="selectColor" v-model="multiplier" class="form-control">
+						<option :value="color.multiplier" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+					</select>			
+					</div>
+
+					<div class="col-sm-4 form-group">
+						<label for="tolerance">Tolerance</label>
+						<select name="tolerance" id="" @click="selectColor" v-model="tolerance" class="form-control">
+						<option :value="color.tolerance" v-for="color in colors" :style="color.styl">{{ color.col }}</option>		
+					</select>			
+					</div>
+				</div>
+			</div>	
+			<div id="finalRes">
+				<div class="text-center">
+					<h2>Resistance: {{ calcResistance }}</h2>
+					<h2>Tolerance:  {{ calcTolerance }}</h2>		
+				</div>	
+			</div>
+			
 		</div>
 		<script src="./script.js"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+
 	</body>
 </html>
